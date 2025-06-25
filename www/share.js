@@ -1,13 +1,16 @@
-module.exports = function(text,title,mimetype,success,error){
+module.exports = function(text, title, emailArray, files, success, error){
   if(typeof text !== "string") {
     text = "";
   }
   if(typeof title !== "string") {
     title = "Share";
   }
-  if(typeof mimetype !== "string") {
-    mimetype = "text/plain";
+  if(!Array.isArray(emailArray)) {
+    emailArray = [];
   }
-  cordova.exec(success,error,"Share","share",[text,title,mimetype]);
+  if(!Array.isArray(files)) {
+    files = [];
+  }
+  cordova.exec(success, error, "Share", "share", [text, title, emailArray, files]);
   return true;
 };

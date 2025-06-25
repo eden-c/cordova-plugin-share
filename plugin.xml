@@ -11,14 +11,30 @@ id="nl.madebymark.share"
     <js-module src="www/share.js" name="Share">
         <clobbers target="window.navigator.share" />
     </js-module>
-    
-    <!-- android -->
+      <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="Share" >
                 <param name="android-package" value="nl.madebymark.share.Share"/>
             </feature>
         </config-file>
+        
+        <!-- FileProvider configuration for Android 7.0+ file sharing -->
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="$PACKAGE_NAME.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+                <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths" />
+            </provider>
+        </config-file>
+        
+        <!-- File paths configuration -->
+        <resource-file src="src/android/file_paths.xml" target="res/xml/file_paths.xml" />
+        
         <source-file src="src/android/Share.java" target-dir="src/nl/madebymark/share" />
      </platform>
 
