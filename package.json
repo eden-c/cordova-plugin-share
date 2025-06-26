@@ -8,12 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/cordova-plugin-share.git"
+    "url": "git+https://github.com/eden-c/cordova-plugin-share.git"
   },
   "keywords": [
     "share",
-    "facebook",
-    "twitter",
+    "email",
     "cordova",
     "phonegap",
     "ecosystem:cordova",
@@ -23,11 +22,11 @@
   "author": "Your Name",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yourusername/cordova-plugin-share/issues"
+    "url": "https://github.com/eden-c/cordova-plugin-share/issues"
   },
-  "homepage": "https://github.com/yourusername/cordova-plugin-share#readme",
+  "homepage": "https://github.com/eden-c/cordova-plugin-share#readme",
   "cordova": {
-    "id": "nl.madebymark.share",
+    "id": "ShareViaEmailPlugin",
     "platforms": [
       "android",
       "ios"
