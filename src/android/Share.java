@@ -1,4 +1,4 @@
-package nl.madebymark.share;
+package mh.plugins.share_files_to_email;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
