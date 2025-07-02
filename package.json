@@ -1,5 +1,5 @@
 {
-  "name": "my-plugin-share-files-to-email",
+  "name": "mh-plugin-share-files-to-email",
   "version": "0.1.1",
   "description": "Share plugin for Cordova/PhoneGap",
   "main": "www/share.js",
