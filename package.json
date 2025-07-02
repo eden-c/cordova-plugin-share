@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eden-c/cordova-plugin-share.git"
+    "url": "git+https://github.com/miller-group/plugin-share-files-to-email.git"
   },
   "keywords": [
     "share",
@@ -22,9 +22,9 @@
   "author": "Your Name",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/eden-c/cordova-plugin-share/issues"
+    "url": "https://github.com/miller-group/plugin-share-files-to-email/issues"
   },
-  "homepage": "https://github.com/eden-c/cordova-plugin-share#readme",
+  "homepage": "https://github.com/miller-group/plugin-share-files-to-email#readme",
   "cordova": {
     "id": "ShareViaEmailPlugin",
     "platforms": [
