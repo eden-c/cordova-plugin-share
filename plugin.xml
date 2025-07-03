@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-xmlns:android="http://schemas.android.com/apk/res/android"
-id="ShareViaEmailPlugin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="mh-plugin-share-files-to-email"
     version="0.1.1">
     <name>Share</name>
     <description>Share</description>
     <license>Apache 2.0</license>
     <keywords>share,email</keywords>
-    
+
     <js-module src="www/share.js" name="Share">
         <clobbers target="window.navigator.share" />
     </js-module>
-      <!-- android -->
+    <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="Share" >
-                <param name="android-package" value="nl.madebymark.share.Share"/>
+            <feature name="Share">
+                <param name="android-package" value="mh.plugins.share_files_to_email.Share" />
             </feature>
         </config-file>
-        
+
         <!-- FileProvider configuration for Android 7.0+ file sharing -->
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
             <provider
@@ -31,21 +31,21 @@ id="ShareViaEmailPlugin"
                     android:resource="@xml/file_paths" />
             </provider>
         </config-file>
-        
+
         <!-- File paths configuration -->
         <resource-file src="src/android/file_paths.xml" target="res/xml/file_paths.xml" />
-        
-        <source-file src="src/android/Share.java" target-dir="src/nl/madebymark/share" />
-     </platform>
 
-     <!-- ios -->
-     <platform name="ios">    
-         <config-file target="config.xml" parent="/*">
-             <feature name="Share">
-                 <param name="ios-package" value="MMShare" /> 
-             </feature>
-         </config-file>
-         <header-file src="src/ios/MMShare.h" />
-         <source-file src="src/ios/MMShare.m" />
-     </platform>
+        <source-file src="src/android/Share.java" target-dir="src/mh/plugins/share_files_to_email" />
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Share">
+                <param name="ios-package" value="MMShare" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/MMShare.h" />
+        <source-file src="src/ios/MMShare.m" />
+    </platform>
 </plugin>

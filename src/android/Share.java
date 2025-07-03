@@ -1,4 +1,4 @@
-package nl.madebymark.share;
+package mh.plugins.share_files_to_email;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Base64;
+
 import android.util.Log;
 import android.support.v4.content.FileProvider;
 
@@ -22,6 +23,7 @@ import java.util.ArrayList;
  * This class echoes a string called from JavaScript.
  */
 public class Share extends CordovaPlugin {
+
     private static final String TAG = "SharePlugin";
     
     @Override
@@ -31,26 +33,31 @@ public class Share extends CordovaPlugin {
             String subject = args.getString(1);
             JSONArray toArray = args.getJSONArray(2);
             JSONArray filesArray = args.getJSONArray(3);
-            
+
             // Convert JSONArray to String array
             String[] toEmails = new String[toArray.length()];
             for (int i = 0; i < toArray.length(); i++) {
                 toEmails[i] = toArray.getString(i);
             }
-            
+
             this.share(message, subject, toEmails, filesArray, callbackContext);
             return true;
         }
         return false;
-    }    private void share(String message, String subject, String[] to, JSONArray filesArray, CallbackContext callbackContext) {
+    }
+
+    private void share(String message, String subject, String[] to, JSONArray filesArray,
+            CallbackContext callbackContext) {
         try {
             Intent emailIntent;
             ArrayList<Uri> attachmentUris = new ArrayList<>();
+
             // debugging output
             Log.d(TAG, "Share plugin called with message: " + message + 
                 ", subject: " + subject + 
                 ", to: " + String.join(", ", to) + 
                 ", files: " + filesArray.toString());
+
             // Process file attachments
             if (filesArray != null && filesArray.length() > 0) {
                 for (int i = 0; i < filesArray.length(); i++) {
@@ -58,6 +65,7 @@ public class Share extends CordovaPlugin {
                     String fileName = fileObj.getString("fileName");
                     String base64Data = fileObj.getString("base64");
                     String mimeType = fileObj.optString("mimeType", "application/octet-stream");
+
                     // debugging output
                     Log.d(TAG, "Processing file attachment: " + 
                         "fileName: " + fileName + 
@@ -69,7 +77,7 @@ public class Share extends CordovaPlugin {
                         attachmentUris.add(fileUri);    
                     }
                 }
-            }            // Choose intent action based on whether we have attachments
+            } // Choose intent action based on whether we have attachments
             if (attachmentUris.size() > 0) {
                 emailIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
                 emailIntent.setData(Uri.parse("mailto:"));
@@ -80,7 +88,7 @@ public class Share extends CordovaPlugin {
                 emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setData(Uri.parse("mailto:"));
             }
-            
+
             emailIntent.putExtra(Intent.EXTRA_EMAIL, to);
             emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
             emailIntent.putExtra(Intent.EXTRA_TEXT, message);
@@ -100,7 +108,7 @@ public class Share extends CordovaPlugin {
             callbackContext.error("Error sending email: " + e.getMessage());
         }
     }
-    
+
     private Uri createTempFileFromBase64(String fileName, String base64Data, String mimeType) {
         Log.d(TAG, "createTempFileFromBase64 called with fileName: " + fileName + ", mimeType: " + mimeType);
         
@@ -137,11 +145,13 @@ public class Share extends CordovaPlugin {
             Log.d(TAG, "Successfully written " + decodedData.length + " bytes to temp file");
 
             // Return file URI using FileProvider for Android 7.0+
+
             String authority = this.cordova.getActivity().getPackageName() + ".fileprovider";
             Log.d(TAG, "Creating FileProvider URI with authority: " + authority);
             
             Uri fileUri = FileProvider.getUriForFile(
-                this.cordova.getActivity(),
+
+              this.cordova.getActivity(),
                 authority,
                 tempFile
             );
